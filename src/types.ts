@@ -136,3 +136,76 @@ export interface FullUserResponse {
   createdAt: Date;
   updatedAt: Date;
 }
+
+export interface CreateSubscriptionInput {
+  workspaceId: string;
+  planId: string;
+  status?: string;
+  currentPeriodStart?: string;
+  currentPeriodEnd?: string;
+}
+
+export interface SubscriptionResponse {
+  id: string;
+  status: string;
+  currentPeriodStart: string;
+  currentPeriodEnd: string;
+  canceledAt: string | null;
+  createdAt: string;
+  plan: {
+    id: string;
+    name: string;
+    slug: string;
+    price: number;
+    currency: string;
+    interval: string;
+    product: { name: string; slug: string };
+  };
+  workspace: { id: string; name: string; slug: string };
+}
+
+export interface CreateOrderInput {
+  workspaceId: string;
+  userId: string;
+  productName: string;
+  sourceService: string;
+  status?: string;
+  currency?: string;
+  subtotal: number;
+  tax?: number;
+  total: number;
+  items?: Array<{
+    name: string;
+    quantity?: number;
+    unitPrice: number;
+    taxRate?: number;
+  }>;
+  metadata?: Record<string, unknown>;
+}
+
+export interface OrderResponse {
+  id: string;
+  orderNumber: string;
+  productName: string;
+  sourceService: string;
+  status: string;
+  subtotal: number;
+  tax: number;
+  total: number;
+  currency: string;
+  metadata?: unknown;
+  createdAt: string;
+  items: Array<{
+    id: string;
+    name: string;
+    quantity: number;
+    unitPrice: number;
+  }>;
+  payments?: Array<{
+    id: string;
+    provider: string;
+    status: string;
+    amount: number;
+    paidAt: string | null;
+  }>;
+}

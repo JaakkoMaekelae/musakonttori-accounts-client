@@ -13,6 +13,10 @@ import type {
   CreateWorkspaceInput,
   UpdateWorkspaceInput,
   InviteInput,
+  CreateSubscriptionInput,
+  SubscriptionResponse,
+  CreateOrderInput,
+  OrderResponse,
 } from "./types";
 
 export * from "./types";
@@ -190,6 +194,56 @@ export class AccountsClient {
       userToken,
       body: JSON.stringify(input),
     });
+  }
+
+  async createSubscription(
+    userToken: string,
+    input: CreateSubscriptionInput,
+  ): Promise<SubscriptionResponse> {
+    return this.request<SubscriptionResponse>("/api/subscriptions", {
+      method: "POST",
+      userToken,
+      body: JSON.stringify(input),
+    });
+  }
+
+  async getSubscriptions(
+    userToken: string,
+    opts: { workspaceId?: string; userId?: string },
+  ): Promise<{ subscriptions: SubscriptionResponse[] }> {
+    const params = new URLSearchParams();
+    if (opts.workspaceId) params.set("workspaceId", opts.workspaceId);
+    if (opts.userId) params.set("userId", opts.userId);
+    return this.request<{ subscriptions: SubscriptionResponse[] }>(
+      `/api/subscriptions?${params.toString()}`,
+      { userToken },
+    );
+  }
+
+  async createOrder(
+    userToken: string,
+    input: CreateOrderInput,
+  ): Promise<OrderResponse> {
+    return this.request<OrderResponse>("/api/orders", {
+      method: "POST",
+      userToken,
+      body: JSON.stringify(input),
+    });
+  }
+
+  async getOrders(
+    userToken: string,
+    opts: { workspaceId?: string; userId?: string; page?: number; limit?: number },
+  ): Promise<{ orders: OrderResponse[]; pagination: { page: number; limit: number; total: number; totalPages: number } }> {
+    const params = new URLSearchParams();
+    if (opts.workspaceId) params.set("workspaceId", opts.workspaceId);
+    if (opts.userId) params.set("userId", opts.userId);
+    if (opts.page) params.set("page", String(opts.page));
+    if (opts.limit) params.set("limit", String(opts.limit));
+    return this.request<{ orders: OrderResponse[]; pagination: { page: number; limit: number; total: number; totalPages: number } }>(
+      `/api/orders?${params.toString()}`,
+      { userToken },
+    );
   }
 }
 
