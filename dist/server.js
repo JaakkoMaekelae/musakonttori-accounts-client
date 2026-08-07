@@ -186,7 +186,7 @@ var AccountsClient = class {
   }
   async getProducts(productSlug) {
     const params = productSlug ? `?product=${encodeURIComponent(productSlug)}` : "";
-    return this.request(`/api/products${params}`);
+    return this.request(`/api/products${params}`, {});
   }
 };
 function createAccountsClient(config) {

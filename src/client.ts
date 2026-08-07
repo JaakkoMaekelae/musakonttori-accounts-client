@@ -249,7 +249,7 @@ export class AccountsClient {
 
   async getProducts(productSlug?: string): Promise<ProductListResponse> {
     const params = productSlug ? `?product=${encodeURIComponent(productSlug)}` : "";
-    return this.request<ProductListResponse>(`/api/products${params}`);
+    return this.request<ProductListResponse>(`/api/products${params}`, {});
   }
 }
 
