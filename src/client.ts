@@ -17,6 +17,7 @@ import type {
   SubscriptionResponse,
   CreateOrderInput,
   OrderResponse,
+  ProductListResponse,
 } from "./types";
 
 export * from "./types";
@@ -246,9 +247,9 @@ export class AccountsClient {
     );
   }
 
-  async getProducts(productSlug?: string): Promise<{ products: Array<{ id: string; name: string; slug: string; description: string | null; category: string; plans: Array<{ id: string; name: string; slug: string; price: number; currency: string; interval: string; entitlements: Array<{ key: string; value: string }> }> }> }> {
+  async getProducts(productSlug?: string): Promise<ProductListResponse> {
     const params = productSlug ? `?product=${encodeURIComponent(productSlug)}` : "";
-    return this.request<{ products: Array<{ id: string; name: string; slug: string; description: string | null; category: string; plans: Array<{ id: string; name: string; slug: string; price: number; currency: string; interval: string; entitlements: Array<{ key: string; value: string }> }> }> }>(`/api/products${params}`);
+    return this.request<ProductListResponse>(`/api/products${params}`);
   }
 }
 

@@ -209,3 +209,31 @@ export interface OrderResponse {
     paidAt: string | null;
   }>;
 }
+
+export interface PlanEntitlement {
+  key: string;
+  value: string;
+}
+
+export interface PlanResponse {
+  id: string;
+  name: string;
+  slug: string;
+  price: number;
+  currency: string;
+  interval: string;
+  entitlements: PlanEntitlement[];
+}
+
+export interface ProductResponse {
+  id: string;
+  name: string;
+  slug: string;
+  description: string | null;
+  category: string;
+  plans: PlanResponse[];
+}
+
+export interface ProductListResponse {
+  products: ProductResponse[];
+}
