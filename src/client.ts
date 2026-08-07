@@ -114,7 +114,7 @@ export class AccountsClient {
     return this.request<{ token: string }>("/api/auth/refresh", {
       method: "POST",
       userToken,
-      body: JSON.stringify({}),
+      body: JSON.stringify({ token: userToken }),
     });
   }
 

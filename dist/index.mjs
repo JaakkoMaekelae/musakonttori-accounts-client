@@ -1,7 +1,7 @@
 import {
   AccountsClient,
   createAccountsClient
-} from "./chunk-PJHPARY7.mjs";
+} from "./chunk-QHS3H3O6.mjs";
 export {
   AccountsClient,
   createAccountsClient

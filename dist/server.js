@@ -97,7 +97,7 @@ var AccountsClient = class {
     return this.request("/api/auth/refresh", {
       method: "POST",
       userToken,
-      body: JSON.stringify({})
+      body: JSON.stringify({ token: userToken })
     });
   }
   async getMe(userToken) {
