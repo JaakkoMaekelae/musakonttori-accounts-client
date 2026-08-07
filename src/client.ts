@@ -245,6 +245,11 @@ export class AccountsClient {
       { userToken },
     );
   }
+
+  async getProducts(productSlug?: string): Promise<{ products: Array<{ id: string; name: string; slug: string; description: string | null; category: string; plans: Array<{ id: string; name: string; slug: string; price: number; currency: string; interval: string; entitlements: Array<{ key: string; value: string }> }> }> }> {
+    const params = productSlug ? `?product=${encodeURIComponent(productSlug)}` : "";
+    return this.request<{ products: Array<{ id: string; name: string; slug: string; description: string | null; category: string; plans: Array<{ id: string; name: string; slug: string; price: number; currency: string; interval: string; entitlements: Array<{ key: string; value: string }> }> }> }>(`/api/products${params}`);
+  }
 }
 
 export function createAccountsClient(config: ServiceConfig): AccountsClient {

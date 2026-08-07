@@ -150,6 +150,44 @@ var AccountsClient = class {
       body: JSON.stringify(input)
     });
   }
+  async createSubscription(userToken, input) {
+    return this.request("/api/subscriptions", {
+      method: "POST",
+      userToken,
+      body: JSON.stringify(input)
+    });
+  }
+  async getSubscriptions(userToken, opts) {
+    const params = new URLSearchParams();
+    if (opts.workspaceId) params.set("workspaceId", opts.workspaceId);
+    if (opts.userId) params.set("userId", opts.userId);
+    return this.request(
+      `/api/subscriptions?${params.toString()}`,
+      { userToken }
+    );
+  }
+  async createOrder(userToken, input) {
+    return this.request("/api/orders", {
+      method: "POST",
+      userToken,
+      body: JSON.stringify(input)
+    });
+  }
+  async getOrders(userToken, opts) {
+    const params = new URLSearchParams();
+    if (opts.workspaceId) params.set("workspaceId", opts.workspaceId);
+    if (opts.userId) params.set("userId", opts.userId);
+    if (opts.page) params.set("page", String(opts.page));
+    if (opts.limit) params.set("limit", String(opts.limit));
+    return this.request(
+      `/api/orders?${params.toString()}`,
+      { userToken }
+    );
+  }
+  async getProducts(productSlug) {
+    const params = productSlug ? `?product=${encodeURIComponent(productSlug)}` : "";
+    return this.request(`/api/products${params}`);
+  }
 };
 function createAccountsClient(config) {
   return new AccountsClient(config);
