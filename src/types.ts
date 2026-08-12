@@ -99,6 +99,10 @@ export interface RegisterResponse {
   };
 }
 
+export interface SwitchWorkspaceResponse {
+  token: string;
+}
+
 export interface ServiceConfig {
   apiUrl: string;
   serviceName: string;

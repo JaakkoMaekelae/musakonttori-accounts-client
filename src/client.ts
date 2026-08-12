@@ -6,6 +6,7 @@ import type {
   RegisterInput,
   LoginResponse,
   RegisterResponse,
+  SwitchWorkspaceResponse,
   PermissionResult,
   WorkspacePermission,
   FullUserResponse,
@@ -127,6 +128,17 @@ export class AccountsClient {
   async getWorkspaces(userToken: string): Promise<Workspace[]> {
     return this.request<Workspace[]>("/api/me/workspaces", {
       userToken,
+    });
+  }
+
+  async switchWorkspace(
+    userToken: string,
+    workspaceId: string,
+  ): Promise<SwitchWorkspaceResponse> {
+    return this.request<SwitchWorkspaceResponse>("/api/auth/switch-workspace", {
+      method: "POST",
+      userToken,
+      body: JSON.stringify({ workspaceId }),
     });
   }
 

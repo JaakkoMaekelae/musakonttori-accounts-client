@@ -92,6 +92,9 @@ interface RegisterResponse {
         email: string;
     };
 }
+interface SwitchWorkspaceResponse {
+    token: string;
+}
 interface ServiceConfig {
     apiUrl: string;
     serviceName: string;
@@ -243,6 +246,7 @@ declare class AccountsClient {
     }>;
     getMe(userToken: string): Promise<FullUserResponse>;
     getWorkspaces(userToken: string): Promise<Workspace[]>;
+    switchWorkspace(userToken: string, workspaceId: string): Promise<SwitchWorkspaceResponse>;
     checkPermission(userToken: string, product: string, opts?: {
         action?: string;
         resourceType?: string;
@@ -279,4 +283,4 @@ declare class AccountsClient {
 }
 declare function createAccountsClient(config: ServiceConfig): AccountsClient;
 
-export { AccountsClient, type CreateOrderInput, type CreateSubscriptionInput, type CreateWorkspaceInput, type FullUserResponse, type InviteInput, type LoginInput, type LoginResponse, type Membership, type OrderResponse, type PermissionResult, type PlanEntitlement, type PlanResponse, type ProductListResponse, type ProductResponse, type RegisterInput, type RegisterResponse, type ServiceConfig, type SubscriptionResponse, type UpdateWorkspaceInput, type UserPayload, type UserProfile, type Workspace, type WorkspacePermission, createAccountsClient };
+export { AccountsClient, type CreateOrderInput, type CreateSubscriptionInput, type CreateWorkspaceInput, type FullUserResponse, type InviteInput, type LoginInput, type LoginResponse, type Membership, type OrderResponse, type PermissionResult, type PlanEntitlement, type PlanResponse, type ProductListResponse, type ProductResponse, type RegisterInput, type RegisterResponse, type ServiceConfig, type SubscriptionResponse, type SwitchWorkspaceResponse, type UpdateWorkspaceInput, type UserPayload, type UserProfile, type Workspace, type WorkspacePermission, createAccountsClient };

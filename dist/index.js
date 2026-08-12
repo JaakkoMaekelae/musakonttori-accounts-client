@@ -110,6 +110,13 @@ var AccountsClient = class {
       userToken
     });
   }
+  async switchWorkspace(userToken, workspaceId) {
+    return this.request("/api/auth/switch-workspace", {
+      method: "POST",
+      userToken,
+      body: JSON.stringify({ workspaceId })
+    });
+  }
   async checkPermission(userToken, product, opts) {
     return this.request("/api/permissions/check", {
       method: "POST",
