@@ -27,14 +27,19 @@
   "scripts": {
     "build": "tsup",
     "typecheck": "tsc --noEmit",
-    "lint": "eslint . --cache"
+    "lint": "eslint . --cache",
+    "test": "vitest run",
+    "test:watch": "vitest"
   },
   "dependencies": {
     "jose": "^6.2.7"
   },
   "devDependencies": {
+    "@types/node": "^26.2.0",
+    "@vitejs/plugin-react": "^4.3.0",
     "tsup": "^8.3.5",
-    "typescript": "^5.9.3"
+    "typescript": "^5.9.3",
+    "vitest": "^2.1.0"
   },
   "peerDependencies": {
     "next": ">=16"

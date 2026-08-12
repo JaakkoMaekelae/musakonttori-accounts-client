@@ -1,75 +1,50 @@
-# @musakonttori/accounts-client
+---
+type: index
+status: active
+owner: Musakonttori
+---
 
-Client SDK for Musakonttori Accounts — the headless JWT identity service.
+# Musakonttori Obsidian Vault — Future State
 
-**Documentation:** [Architecture](docs/architecture.md) · [Disaster recovery](docs/disaster-recovery.md) ·
-[Accounts service](../musakonttori-accounts/README.md) ·
-[Ecosystem architecture](../MUSAKONTTORI_ARCHITECTURE.md)
+This package contains the future-state product documentation for the Musakonttori ecosystem.
 
-## Installation
+## Start here
 
-```bash
-pnpm add github:JaakkoMaekelae/musakonttori-accounts-client#main
-```
+- [[00 Musakonttori HQ]]
+- [[01 Ecosystem Map]]
+- [[02 Shared Platform]]
+- [[03 Product Matrix]]
+- [[04 Master Roadmap]]
 
-For Next.js App Router applications, prefer `@musakonttori/accounts-next`, which wraps this contract
-with server helpers and session plumbing.
+## Products
 
-## Usage
+- [[10 Stageflow]]
+- [[11 Ticketing]]
+- [[12 LiveGuide]]
+- [[13 SmartLink]]
+- [[14 Market]]
+- [[15 SoundLaunch]]
+- [[16 Mastering]]
 
-```ts
-import { createAccountsClient } from "@musakonttori/accounts-client";
+## Documentation principle
 
-const accounts = createAccountsClient({
-  apiUrl: process.env.ACCOUNTS_API_URL!,
-  serviceName: "stageflow",
-  privateKey: process.env.SERVICE_JWT_PRIVATE_KEY!,
-});
+These files describe **what each product should become**, not only what exists today.
 
-const { token, user } = await accounts.login({ email: "a@b.com", password: "secret" });
+Use them as the product source of truth for:
 
-const perms = await accounts.checkPermission(token, "stageflow");
+- Vision
+- Scope
+- Future capabilities
+- Product boundaries
+- Shared services
+- Integrations
+- Company dashboards
+- Super Admin
+- APIs
+- Data
+- AI
+- Monetization
+- Roadmap
+- Definition of Done
 
-const me = await accounts.getMe(token);
-```
-
-The SDK mints the 5-minute service JWT and sets both headers
-(`Authorization: Bearer <service-jwt>`, `X-User-Token: Bearer <user-jwt>`) — callers never assemble the
-header protocol themselves.
-
-## API
-
-| Method | Description |
-|--------|-------------|
-| `login(input)` | Sign in with email + password |
-| `register(input)` | Register a new user |
-| `refreshToken(token)` | Refresh a user JWT |
-| `getMe(token)` | Fetch the user profile + memberships |
-| `getWorkspaces(token)` | List the user's workspaces |
-| `checkPermission(token, product, opts?)` | Check access to a product |
-| `listPermissions(token, product)` | List workspace rights for a product |
-| `getWorkspaceMembers(token, id)` | Fetch workspace members |
-| `createWorkspace(token, input)` | Create a workspace |
-| `updateWorkspace(token, slug, input)` | Update a workspace |
-| `inviteToWorkspace(token, slug, input)` | Invite a user to a workspace |
-
-## Requirements
-
-- `SERVICE_JWT_PRIVATE_KEY` environment variable (RS256 PEM)
-- The service registered in the Accounts database (`Service` table) — see
-  [the integration guide](../musakonttori-accounts/README.md#integration-guide)
-
-## Development
-
-```bash
-pnpm build       # tsup → dist/
-pnpm typecheck   # tsc --noEmit
-pnpm lint
-```
-
-## Release Discipline
-
-Consumers install this package from the `#main` branch, so **a merge here becomes a production change
-in every consuming product at its next install**. Verify against a real consumer's auth suite before
-merging, and revert rather than fixing forward if something breaks. Pinning consumers to tags is the
-recorded follow-up — see [docs/disaster-recovery.md](docs/disaster-recovery.md).
+Detailed implementation tickets should live in the development task system, while Obsidian stores the durable product and architecture knowledge.
