@@ -3,3 +3,16 @@ dist/
 *.tsbuildinfo
 
 .superpowers/
+
+# Obsidian vault duplicates (source of truth lives in own_projects/ vault root — do not copy here)
+/.obsidian/
+/00 Musakonttori HQ.md
+/01 Ecosystem Map.md
+/02 Shared Platform.md
+/03 Product Matrix.md
+/04 Master Roadmap.md
+/Ecosystem Map.md
+/Shared Platform.md
+/Product Matrix.md
+/Master Roadmap.md
+/Musakonttori HQ.md
