@@ -79,6 +79,8 @@ export interface RegisterInput {
   email: string;
   password: string;
   name?: string;
+  /** Sign-up account type. Defaults to "consumer" when omitted. */
+  accountType?: "consumer" | "business";
 }
 
 export interface LoginResponse {
